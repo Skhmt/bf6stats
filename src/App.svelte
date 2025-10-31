@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Chart from "./lib/Chart.svelte";
 
-	let hp = $state("100"); // 100 for mp, 200 for br/redsec, 60 for hc
+	let hp = $state("100"); // 100 for mp, 180 for br/redsec, 60 for hc, 140 for gauntlet
 	let ads = $state(false);
 	let mv = $state(true);
 	let charttype = $state("ttk"); // ttk, stk, dps
@@ -52,8 +52,8 @@
 						<select class="select select-sm" bind:value={hp}>
 							<option value="60">60 (HC)</option>
 							<option value="100">100 (MP)</option>
-							<!-- <option value="140">140 (Ga)</option> -->
-							<option value="200">200 (BR)</option>
+							<option value="140">140 (Ga)</option>
+							<option value="180">180 (BR)</option>
 						</select>
 					</label>
 				</li>
