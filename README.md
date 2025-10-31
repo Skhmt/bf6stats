@@ -5,12 +5,14 @@
 - no air resistance
 - damage falloff is in discrete steps, not gradually
 - there are no other damage falloff distances besides 5m
+- only two damage locations: head and everything else
 
 ## todo
 
 - get support benefit for ADS with LMGs
 - support resizing to phone width, specifically the menu settings
 - damage per magazine?
+- headshot damage
 
 ## get data
 
