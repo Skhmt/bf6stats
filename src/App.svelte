@@ -7,11 +7,11 @@
 	let charttype = $state("ttk"); // ttk, stk, dps
 
 	let ar = $state(true);
-	let lmg = $state(true);
-	let smg = $state(true);
-	let carbine = $state(true);
-	let pistol = $state(true);
-	let dmr = $state(true);
+	let lmg = $state(false);
+	let smg = $state(false);
+	let carbine = $state(false);
+	let pistol = $state(false);
+	let dmr = $state(false);
 
 	let options = $derived({
 		hp: parseInt(hp),
