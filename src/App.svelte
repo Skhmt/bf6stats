@@ -52,7 +52,7 @@
 						<select class="select select-sm" bind:value={hp}>
 							<option value="60">60 (HC)</option>
 							<option value="100">100 (MP)</option>
-							<option value="140">140 (Ga)</option>
+							<!-- <option value="140">140 (Ga)</option> -->
 							<option value="200">200 (BR)</option>
 						</select>
 					</label>
