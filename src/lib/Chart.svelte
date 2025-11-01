@@ -1,13 +1,16 @@
 <script lang="ts">
-	import Plotly from "plotly.js-dist-min";
-	import rawData from "../assets/data.json";
+	import Plotly from 'plotly.js-dist-min';
+	import rawData from '../assets/data.json';
+	import lineColors from '../assets/linecolors.json';
 
 	let { filters = $bindable() } = $props();
 
 	let div: HTMLDivElement; // reference to the chart div
+	let colorIndex = 0;
+	const colorList: Array<ColorStyle> = generateColorList();
 
 	// these *must* exactly correspond with the "range" keys in the rawData
-	const distances = ["5m", "10m", "20m", "35m", "50m", "70m"];
+	const distances = ['5m', '10m', '20m', '35m', '50m', '70m'];
 
 	type Filter = {
 		hp: number;
@@ -27,34 +30,39 @@
 		type: string;
 		ads: string;
 		rpm: string;
-		"5m": string;
-		"10m": string;
-		"20m": string;
-		"35m": string;
-		"50m": string;
-		"70m": string;
+		'5m': string;
+		'10m': string;
+		'20m': string;
+		'35m': string;
+		'50m': string;
+		'70m': string;
 		[key: string]: any;
+	};
+
+	type ColorStyle = {
+		color: string;
+		dash: string;
 	};
 
 	const plotlyLayout: Partial<Plotly.Layout> = {
 		// height: 900,
 		showlegend: true,
-		plot_bgcolor: "black", // Dark background inside the plot
-		paper_bgcolor: "black", // Dark background outside the plot
+		plot_bgcolor: 'black', // Dark background inside the plot
+		paper_bgcolor: 'black', // Dark background outside the plot
 		font: {
-			color: "white", // Adjust text color for better visibility
+			color: 'white', // Adjust text color for better visibility
 		},
 		xaxis: {
 			title: {
-				text: "Distance (m)",
+				text: 'Distance (m)',
 			},
-			gridcolor: "#333",
+			gridcolor: '#333',
 		},
 		yaxis: {
 			title: {
-				text: "Time (ms)",
+				text: 'Time (ms)',
 			},
-			gridcolor: "#222",
+			gridcolor: '#222',
 		},
 	};
 
@@ -129,20 +137,22 @@
 		element: HTMLDivElement,
 		dists: Array<string>,
 	) {
+		colorIndex = 0;
+
 		// filter the data to only include the weapon types selected by the user
 		const filteredData = data.filter((item: any) => {
 			return (
-				(item.type === "Assault Rifle" && filter.ar) ||
-				(item.type === "Carbine" && filter.carbine) ||
-				(item.type === "DMR" && filter.dmr) ||
-				(item.type === "LMG" && filter.lmg) ||
-				(item.type === "Pistol" && filter.pistol) ||
-				(item.type === "SMG" && filter.smg)
+				(item.type === 'Assault Rifle' && filter.ar) ||
+				(item.type === 'Carbine' && filter.carbine) ||
+				(item.type === 'DMR' && filter.dmr) ||
+				(item.type === 'LMG' && filter.lmg) ||
+				(item.type === 'Pistol' && filter.pistol) ||
+				(item.type === 'SMG' && filter.smg)
 			);
 		});
 
 		const numDists: Array<number> = dists.map((d) =>
-			parseInt(d.replace("m", "")),
+			parseInt(d.replace('m', '')),
 		);
 
 		// create the chart data
@@ -152,14 +162,14 @@
 			for (let d of dists) {
 				const damage = parseFloat(w[d]);
 				const rpm = parseInt(w.rpm);
-				const dist = parseInt(d.replace("m", ""));
+				const dist = parseInt(d.replace('m', ''));
 
-				if (filter.charttype === "dps") {
+				if (filter.charttype === 'dps') {
 					y.push(getDPS(damage, rpm));
 				} else {
 					// do STK calcs
 					const stk = getSTK(damage, filter.hp);
-					if (filter.charttype === "ttk") {
+					if (filter.charttype === 'ttk') {
 						const ads = filter.ads ? parseInt(w.ads) : 0;
 						const traveltime =
 							filter.mv && w.mv
@@ -173,31 +183,36 @@
 				}
 			}
 
-			let shortType = "";
-			if (w.type === "Assault Rifle") shortType = "AR";
-			else if (w.type === "Carbine") shortType = "Crbn";
-			else if (w.type === "DMR") shortType = "DMR";
-			else if (w.type === "LMG") shortType = "LMG";
-			else if (w.type === "Pistol") shortType = "Pstl";
-			else if (w.type === "SMG") shortType = "SMG";
+			let shortType = '';
+			if (w.type === 'Assault Rifle') shortType = 'AR';
+			else if (w.type === 'Carbine') shortType = 'Crbn';
+			else if (w.type === 'DMR') shortType = 'DMR';
+			else if (w.type === 'LMG') shortType = 'LMG';
+			else if (w.type === 'Pistol') shortType = 'Pstl';
+			else if (w.type === 'SMG') shortType = 'SMG';
 
 			chartData.push({
 				name: `[${shortType}] ${w.weapon}`,
-				type: "scatter",
-				mode: "lines+markers",
+				type: 'scatter',
+				mode: 'lines+markers',
 				x: numDists,
 				y: y,
+				line: {
+					color: colorList[colorIndex].color,
+					dash: colorList[colorIndex].dash,
+				},
 			});
+			colorIndex++;
 		}
 
 		// axis labels
-		if (filter.charttype === "dps") {
-			layout!.yaxis!.title!.text = "Damage Per Second";
-		} else if (filter.charttype === "stk") {
-			layout!.yaxis!.title!.text = "Shots";
+		if (filter.charttype === 'dps') {
+			layout!.yaxis!.title!.text = 'Damage Per Second';
+		} else if (filter.charttype === 'stk') {
+			layout!.yaxis!.title!.text = 'Shots';
 		} else {
 			// TTK
-			layout!.yaxis!.title!.text = "Time (mlliseconds)";
+			layout!.yaxis!.title!.text = 'Time (mlliseconds)';
 		}
 
 		// @ts-ignore
@@ -221,6 +236,29 @@
 	function getTravelTime(mv: number, dist: number) {
 		// 1 sec / "mv" meters * "dist" meters * 1000 ms / 1 sec
 		return (1 / mv) * dist * 1000;
+	}
+
+	function generateColorList() {
+		const tempList = [];
+		for (let c of lineColors) {
+			tempList.push({
+				color: c,
+				dash: 'solid',
+			});
+		}
+		for (let c of lineColors) {
+			tempList.push({
+				color: c,
+				dash: 'dot',
+			});
+		}
+		for (let c of lineColors) {
+			tempList.push({
+				color: c,
+				dash: 'dashdot',
+			});
+		}
+		return tempList;
 	}
 </script>
 
