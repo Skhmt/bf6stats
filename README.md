@@ -2,15 +2,13 @@
 
 ## assumptions
 
-- no air resistance
-- damage falloff is in discrete steps, not gradually
-- there are no other damage falloff distances besides 5m
+- no air resistance for bullet velocity
+- there are no other damage falloff distances besides 5?, 10, 20, 35, 50, 70, 80?
 - only two damage locations: head and everything else
 
 ## todo
 
 - get support benefit for ADS with LMGs
-- support resizing to phone width, specifically the menu settings
 - damage per magazine?
 - headshot damage
 
@@ -42,3 +40,7 @@ data .json file should be in the format:
 develop: `npm run dev`
 
 build for dist: `npm run build`
+
+## license
+
+MIT - do what you want
