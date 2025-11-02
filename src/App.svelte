@@ -37,9 +37,12 @@
 				class="menu menu-horizontal lg:menu-horizontal bg-base-200 rounded-box"
 			>
 				<li>
-					<label class="input">
+					<label class="input input-xs lg:input-md">
 						<span class="label">Chart</span>
-						<select class="select select-sm" bind:value={charttype}>
+						<select
+							class="select select-xs lg:select-sm"
+							bind:value={charttype}
+						>
 							<option value="ttk">TTK</option>
 							<option value="stk">STK</option>
 							<option value="dps">DPS</option>
@@ -47,9 +50,12 @@
 					</label>
 				</li>
 				<li>
-					<label class="input">
+					<label class="input input-xs lg:input-md">
 						<span class="label">HP</span>
-						<select class="select select-sm" bind:value={hp}>
+						<select
+							class="select select-xs lg:select-sm"
+							bind:value={hp}
+						>
 							<option value="60">60 (HC)</option>
 							<option value="100">100 (MP)</option>
 							<option value="140">140 (Ga)</option>
@@ -58,28 +64,30 @@
 					</label>
 				</li>
 				<li>
-					<label class="input">
+					<label class="input input-xs lg:input-md">
 						<span class="label">Add ADS time?</span>
 						<input
 							type="checkbox"
-							class="checkbox checkbox-primary"
+							class="checkbox checkbox-xs lg:checkbox-md checkbox-primary"
 							bind:checked={ads}
 						/>
 					</label>
 				</li>
 				<li>
-					<label class="input">
+					<label class="input input-xs lg:input-md">
 						<span class="label">Add velocity?</span>
 						<input
 							type="checkbox"
-							class="checkbox checkbox-primary"
+							class="checkbox checkbox-xs lg:checkbox-md checkbox-primary"
 							bind:checked={mv}
 						/>
 					</label>
 				</li>
 				<li>
 					<details class="dropdown">
-						<summary class="btn btn-primary">Weapon types</summary>
+						<summary class="btn btn-xs lg:btn-md btn-primary"
+							>Weapon types</summary
+						>
 						<ul
 							class="menu dropdown-content dropdown-content bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
 						>

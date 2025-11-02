@@ -6,6 +6,7 @@
 	let { filters = $bindable() } = $props();
 
 	let div: HTMLDivElement; // reference to the chart div
+	let windowWidth = $state(window.innerWidth);
 	let colorIndex = 0;
 	const colorList: Array<ColorStyle> = generateColorList();
 
@@ -56,6 +57,7 @@
 		xaxis: {
 			title: {
 				text: "Distance (m)",
+				standoff: 10,
 			},
 			gridcolor: "#333",
 		},
@@ -64,6 +66,9 @@
 				text: "Time (ms)",
 			},
 			gridcolor: "#222",
+		},
+		legend: {
+			orientation: "v",
 		},
 	};
 
@@ -75,7 +80,8 @@
 
 	$effect(() => {
 		// console.log(filters);
-		if (filters && rawData)
+		console.log(windowWidth);
+		if (filters && rawData && windowWidth)
 			renderChart(
 				filters as Filter,
 				rawData as Array<Weapon>,
@@ -85,6 +91,18 @@
 				distances,
 			);
 	});
+
+	// window.addEventListener("resize", function () {
+	// 	if (filters && rawData && div)
+	// 		renderChart(
+	// 			filters as Filter,
+	// 			rawData as Array<Weapon>,
+	// 			plotlyLayout,
+	// 			plotlyOptions,
+	// 			div,
+	// 			distances,
+	// 		);
+	// });
 
 	/* 
 		Example rawData
@@ -216,6 +234,9 @@
 			layout!.yaxis!.title!.text = "Time (mlliseconds)";
 		}
 
+		console.log(layout!.legend!.orientation);
+		layout!.legend!.orientation = windowWidth < 850 ? "h" : "v";
+
 		// @ts-ignore
 		new Plotly.newPlot(element, chartData, layout, options);
 	}
@@ -263,6 +284,7 @@
 	}
 </script>
 
+<svelte:window bind:innerWidth={windowWidth} />
 <div class="h-full">
 	<div class="h-full" bind:this={div}></div>
 </div>
