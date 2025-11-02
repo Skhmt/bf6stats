@@ -70,6 +70,11 @@
 		legend: {
 			orientation: "v",
 		},
+		margin: {
+			t: 15,
+			b: 50,
+			l: 70,
+		},
 	};
 
 	const plotlyOptions = {
@@ -234,8 +239,15 @@
 			layout!.yaxis!.title!.text = "Time (mlliseconds)";
 		}
 
-		console.log(layout!.legend!.orientation);
-		layout!.legend!.orientation = windowWidth < 850 ? "h" : "v";
+		if (windowWidth < 850) {
+			layout!.legend!.orientation = "h";
+			layout!.margin!.r = 10;
+			layout!.margin!.l = 60;
+		} else {
+			layout!.legend!.orientation = "v";
+			layout!.margin!.r = 50;
+			layout!.margin!.l = 70;
+		}
 
 		// @ts-ignore
 		new Plotly.newPlot(element, chartData, layout, options);
