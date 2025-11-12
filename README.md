@@ -9,6 +9,8 @@
 - get support benefit for ADS with LMGs
 - damage per magazine?
 - headshot damage
+- extend from 0 to 10m, 75m to 100m
+- allow selection of each individual weapon, not just groups
 
 ## get data
 

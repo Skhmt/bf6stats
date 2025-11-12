@@ -3,7 +3,7 @@
 
 	let hp = $state("100"); // 100 for mp, 180 for br/redsec, 60 for hc, 140 for gauntlet
 	let ads = $state(false);
-	let mv = $state(true);
+	let mv = $state(false);
 	let charttype = $state("ttk"); // ttk, stk, dps
 
 	let ar = $state(true);

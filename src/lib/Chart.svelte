@@ -11,7 +11,7 @@
 	const colorList: Array<ColorStyle> = generateColorList();
 
 	// these *must* exactly correspond with the "range" keys in the rawData
-	const distances = ["9m", "21m", "36m", "55m", "75m", "80m"];
+	const distances = ["0m", "9m", "21m", "36m", "55m", "60m", "75m", "100m"];
 
 	type Filter = {
 		hp: number;
@@ -31,12 +31,14 @@
 		type: string;
 		ads: string;
 		rpm: string;
+		"0m": string;
 		"9m": string;
 		"21m": string;
 		"36m": string;
 		"55m": string;
+		"60m": string;
 		"75m": string;
-		"80m": string;
+		"100m": string;
 		[key: string]: any;
 	};
 
@@ -183,6 +185,7 @@
 		const chartData: Array<Object> = [];
 		for (let w of filteredData) {
 			const y = [];
+
 			for (let d of dists) {
 				const damage = parseFloat(w[d]);
 				const rpm = parseInt(w.rpm);
@@ -224,6 +227,7 @@
 				line: {
 					color: colorList[colorIndex].color,
 					dash: colorList[colorIndex].dash,
+					shape: filter.mv ? "linear" : "hv", // hv/vh/vhv/hvh/spline/linear
 				},
 			});
 			colorIndex++;
