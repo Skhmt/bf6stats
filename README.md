@@ -2,9 +2,7 @@
 
 ## assumptions
 
-- no air resistance for bullet velocity
-- there are no other damage falloff distances besides 5?, 10, 20, 35, 50, 70, 80?
-- only two damage locations: head and everything else
+- no air resistance for bullet velocity (this might be wrong)
 
 ## todo
 
@@ -24,12 +22,12 @@ data .json file should be in the format:
 			"ads": "250", // aim down sight - in milliseconds
 			"rpm": "514", // rounds per minute - the firing rate
 			"mv": "1000", // muzzle velocity (optional) - in meters per second
-			"5m": "33.4", // damage at 5 meters
-			"10m": "33.4",
-			"20m": "33.4",
-			"35m": "25",
-			"50m": "25",
-			"70m": "25"
+			"9.5m": "33.4", // damage at 5 meters
+			"21.5m": "33.4",
+			"36.5m": "33.4",
+			"55m": "25",
+			"75m": "25",
+			"80m": "25"
 		},
 		//...
 ]

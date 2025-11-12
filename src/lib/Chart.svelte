@@ -11,7 +11,7 @@
 	const colorList: Array<ColorStyle> = generateColorList();
 
 	// these *must* exactly correspond with the "range" keys in the rawData
-	const distances = ["5m", "10m", "20m", "35m", "50m", "70m", "80m"];
+	const distances = ["9m", "21m", "36m", "55m", "75m", "80m"];
 
 	type Filter = {
 		hp: number;
@@ -31,12 +31,11 @@
 		type: string;
 		ads: string;
 		rpm: string;
-		"5m": string;
-		"10m": string;
-		"20m": string;
-		"35m": string;
-		"50m": string;
-		"70m": string;
+		"9m": string;
+		"21m": string;
+		"36m": string;
+		"55m": string;
+		"75m": string;
 		"80m": string;
 		[key: string]: any;
 	};
@@ -115,14 +114,15 @@
 			{
 				"weapon": "AK4D",
 				"type": "Assault Rifle", // Carbine, DMR, LMG, Pistol, SMG
-				"ads": "250",
-				"rpm": "514",
-				"5m": "33.4",
-				"10m": "33.4",
-				"20m": "33.4",
-				"35m": "25",
-				"50m": "25",
-				"70m": "25"
+				"ads": "250", // aim down sight - in milliseconds
+				"rpm": "514", // rounds per minute - the firing rate
+				"mv": "1000", // muzzle velocity (optional) - in meters per second
+				"9m": "33.4", // damage at 5 meters
+				"21m": "33.4",
+				"36m": "33.4",
+				"55m": "25",
+				"75m": "25",
+				"80m": "25"
 			},
 			...
 		]

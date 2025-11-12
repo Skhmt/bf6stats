@@ -30,7 +30,7 @@
 <main class="flex flex-col h-screen">
 	<div class="flex w-full flex-col lg:flex-row cursor-default navbar">
 		<div class="ml-5 mr-5">
-			<h1>BF6 Stats, 1.1.1.0 (28Oct25)</h1>
+			<h1>BF6 Stats, 1.1.1.5 (10Nov25)</h1>
 		</div>
 		<div>
 			<ul
